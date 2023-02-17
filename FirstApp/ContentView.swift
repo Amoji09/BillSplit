@@ -10,26 +10,58 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-      
-      //TODO: Add a stack to organize views
-      
-      //TODO: Add a textfield for the bill amount
-      
-      //TODO: Add a slider for the amount of people present
-      
-      //TODO: Add Text that displays the amount each person needs to pay
-      
-      //TODO: Add "money image" on top of screen
-      
-      //TODO: Change background to a light blue
-        Text("Bill Split")
+  @State var billAmount = ""
+  var bo : Bool = false
+  var numbers : [Int] = [1,2,3,4,5]
+  var owns = ["Amogh" : "mac", "Hajin" : "windows"]
+  
+  @State var sliderAmount = 0.0
+  var body: some View {
+    ZStack{
+      Color("greeen")
+      VStack(alignment:.center){
+        Image("Money_Cash").resizable().frame(width:300, height:250).cornerRadius(10).padding()
+        TextField("Bill Amount", text: $billAmount).padding().background(Color.white).cornerRadius(10).padding()
+        Slider(value: $sliderAmount).padding()
+        Text("\((Int(ceil(sliderAmount * 20) + 1))) \((Int(ceil(sliderAmount * 20) + 1)) == 1 ? "person" : "people")")
         
+        Text(getSplitAmount(amount:billAmount, people:(Int(ceil(sliderAmount * 20) + 1))))
+        
+      }
     }
+    .ignoresSafeArea()
+  }
+  
+  func getSplitAmount(amount : String, people : Int) -> String {
+    let castAmount = Double(amount) ?? 0
+    var splitAmount = castAmount / Double(people)
+    var x = 1
+    if(x < 2) {
+      print("hello")
+    }
+    switch x {
+      case 1:
+        print("d")
+      default:
+        print("e")
+    }
+    for i in 0...10 {
+      print(i)
+    }
+    while(x < 10) {
+      print(x)
+      x+=1
+    }
+    
+    
+    
+    return String(format: "Split amount: $%.02f",splitAmount)
+  }
+ 
 }
 
 struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
+  static var previews: some View {
+    ContentView()
+  }
 }
